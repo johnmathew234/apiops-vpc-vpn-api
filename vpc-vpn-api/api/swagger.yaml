@@ -1,0 +1,838 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: "apiops-vpc-vpn-api"
+paths:
+  /vpc:
+    get:
+      description: "get the list and details of all VPCs"
+      operationId: "vpcGET"
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: "#/definitions/get-vpcs-DT"
+          x-amf-mediaType: "application/json"
+        "400":
+          description: ""
+          schema:
+            example:
+              code: "400"
+              message: "bad request"
+          x-amf-mediaType: "application/json"
+        "500":
+          description: ""
+          schema:
+            example:
+              code: "500"
+              message: "internal server error"
+          x-amf-mediaType: "application/json"
+      x-swagger-router-controller: "Default"
+    post:
+      description: "create a VPC"
+      operationId: "vpcPOST"
+      parameters:
+      - in: "body"
+        name: "generated"
+        required: false
+        schema:
+          $ref: "#/definitions/post-vpc-DT"
+        x-amf-mediaType: "application/json"
+      responses:
+        "201":
+          description: ""
+          schema:
+            $ref: "#/definitions/post-vpc-response-DT"
+          x-amf-mediaType: "application/json"
+        "400":
+          description: ""
+          schema:
+            example:
+              code: "400"
+              message: "bad request"
+          x-amf-mediaType: "application/json"
+        "500":
+          description: ""
+          schema:
+            example:
+              code: "500"
+              message: "internal server error"
+          x-amf-mediaType: "application/json"
+      x-swagger-router-controller: "Default"
+    x-amf-displayName: "Create and Retrieve VPCs"
+  /vpc/{vpcid}:
+    get:
+      description: "Get the details of a specific VPC by vpc Id"
+      operationId: "vpcVpcidGET"
+      parameters:
+      - name: "vpcid"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: "#/definitions/get-vpc-DT"
+          x-amf-mediaType: "application/json"
+        "400":
+          description: ""
+          schema:
+            example:
+              code: "400"
+              message: "bad request"
+          x-amf-mediaType: "application/json"
+        "500":
+          description: ""
+          schema:
+            example:
+              code: "500"
+              message: "internal server error"
+          x-amf-mediaType: "application/json"
+      x-swagger-router-controller: "Default"
+    delete:
+      description: "Delete a vpc by vpc Id"
+      operationId: "vpcVpcidDELETE"
+      parameters:
+      - name: "vpcid"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: ""
+          schema:
+            example:
+              message: "vpc deleted successfully"
+          x-amf-mediaType: "application/json"
+        "400":
+          description: ""
+          schema:
+            example:
+              code: "400"
+              message: "bad request"
+          x-amf-mediaType: "application/json"
+        "500":
+          description: ""
+          schema:
+            example:
+              code: "500"
+              message: "internal server error"
+          x-amf-mediaType: "application/json"
+      x-swagger-router-controller: "Default"
+    x-amf-displayName: "Delete and retrieve a specific VPC"
+  /vpn: {}
+  /vpn/{vpcid}:
+    get:
+      description: "get the list and of all VPNs"
+      operationId: "vpnVpcidGET"
+      parameters:
+      - name: "vpcid"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: "#/definitions/get-vpns-DT"
+          x-amf-mediaType: "application/json"
+        "400":
+          description: ""
+          schema:
+            example:
+              code: "400"
+              message: "bad request"
+          x-amf-mediaType: "application/json"
+        "500":
+          description: ""
+          schema:
+            example:
+              code: "500"
+              message: "internal server error"
+          x-amf-mediaType: "application/json"
+      x-swagger-router-controller: "Default"
+    post:
+      description: "Create and set-up a vpn"
+      operationId: "vpnVpcidPOST"
+      parameters:
+      - name: "vpcid"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "generated"
+        required: false
+        schema:
+          $ref: "#/definitions/post-vpn-DT"
+        x-amf-mediaType: "application/json"
+      responses:
+        "201":
+          description: ""
+          schema:
+            example:
+              name: "myDatacenterVpn"
+              localAsn: 64512
+              remoteIpAddress: "52.152.216.66"
+              remoteNetworks:
+              - "10.0.0.0/24"
+              tunnelConfigs: []
+          x-amf-mediaType: "application/json"
+        "400":
+          description: ""
+          schema:
+            example:
+              code: "400"
+              message: "bad request"
+          x-amf-mediaType: "application/json"
+        "500":
+          description: ""
+          schema:
+            example:
+              code: "500"
+              message: "internal server error"
+          x-amf-mediaType: "application/json"
+      x-swagger-router-controller: "Default"
+    x-amf-displayName: "Create and retrive VPNs"
+  /vpn/{vpcid}/{vpnid}:
+    get:
+      description: "Get the details of a specific vpn by vpn Id"
+      operationId: "vpnVpcidVpnidGET"
+      parameters:
+      - name: "vpcid"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "vpnid"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: "#/definitions/get-vpn-DT"
+          x-amf-mediaType: "application/json"
+        "400":
+          description: ""
+          schema:
+            example:
+              code: "400"
+              message: "bad request"
+          x-amf-mediaType: "application/json"
+        "500":
+          description: ""
+          schema:
+            example:
+              code: "500"
+              message: "internal server error"
+          x-amf-mediaType: "application/json"
+      x-swagger-router-controller: "Default"
+    delete:
+      description: "Delete a specific vpn by vpnId"
+      operationId: "vpnVpcidVpnidDELETE"
+      parameters:
+      - name: "vpcid"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "vpnid"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: ""
+          schema:
+            example:
+              message: "vpn deleted"
+          x-amf-mediaType: "application/json"
+        "400":
+          description: ""
+          schema:
+            example:
+              code: "400"
+              message: "bad request"
+          x-amf-mediaType: "application/json"
+        "500":
+          description: ""
+          schema:
+            example:
+              code: "500"
+              message: "internal server error"
+          x-amf-mediaType: "application/json"
+      x-swagger-router-controller: "Default"
+    x-amf-displayName: "Delete and retrieve a specific VPN"
+definitions:
+  post-vpc-DT:
+    type: "object"
+    required:
+    - "cidrBlock"
+    - "name"
+    - "region"
+    properties:
+      name:
+        type: "string"
+      region:
+        type: "string"
+      cidrBlock:
+        type: "string"
+      internalDns:
+        $ref: "#/definitions/postvpcDT_internalDns"
+      isDefault:
+        type: "boolean"
+        default: false
+      associatedEnvironments:
+        type: "array"
+        items:
+          type: "string"
+      sharedWith:
+        type: "array"
+        items:
+          type: "string"
+      firewallRules:
+        type: "array"
+        items:
+          $ref: "#/definitions/postvpcDT_firewallRules"
+    example:
+      name: "myProductionVpc"
+      region: "us-east-1"
+      cidrBlock: "192.168.1.0/24"
+      internalDns:
+        dnsServers:
+        - "8.8.8.8"
+        - "8.8.8.4"
+        specialDomains:
+        - "mydomain.local"
+        - "mydomain.localdomain"
+      isDefault: false
+      associatedEnvironments:
+      - "eeeeb145-6f79-402d-85fc-8c90905d2490"
+      sharedWith:
+      - "0000000-1111-2222-3333-44444444444"
+      firewallRules:
+      - cidrBlock: "0.0.0.0/0"
+        protocol: "tcp"
+        fromPort: 8081
+        toPort: 8082
+      - cidrBlock: "192.168.1.0/24"
+        protocol: "tcp"
+        fromPort: 8091
+        toPort: 8092
+    additionalProperties: {}
+  post-vpc-response-DT:
+    type: "object"
+    required:
+    - "associatedEnvironments"
+    - "cidrBlock"
+    - "firewallRules"
+    - "id"
+    - "internalDns"
+    - "isDefault"
+    - "name"
+    - "ownerId"
+    - "region"
+    - "sharedWith"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+      region:
+        type: "string"
+      cidrBlock:
+        type: "string"
+      internalDns:
+        $ref: "#/definitions/postvpcDT_internalDns"
+      isDefault:
+        type: "boolean"
+      associatedEnvironments:
+        type: "array"
+        items:
+          type: "string"
+      ownerId:
+        type: "array"
+        items:
+          type: "string"
+      sharedWith:
+        type: "array"
+        items:
+          type: "string"
+      firewallRules:
+        type: "array"
+        items:
+          $ref: "#/definitions/postvpcDT_firewallRules"
+    example:
+      id: "12345"
+      name: "myProductionVpc"
+      region: "us-east-1"
+      cidrBlock: "192.168.1.0/24"
+      internalDns:
+        dnsServers:
+        - "8.8.8.8"
+        - "8.8.8.4"
+        specialDomains:
+        - "mydomain.local"
+        - "mydomain.localdomain"
+      isDefault: false
+      associatedEnvironments:
+      - "eeeeb145-6f79-402d-85fc-8c90905d2490"
+      ownerId:
+      - "5555555-6666-7777-8888-99999999999"
+      sharedWith:
+      - "0000000-1111-2222-3333-44444444444"
+      firewallRules:
+      - cidrBlock: "0.0.0.0/0"
+        protocol: "tcp"
+        fromPort: 8081
+        toPort: 8082
+      - cidrBlock: "192.168.1.0/24"
+        protocol: "tcp"
+        fromPort: 8091
+        toPort: 8092
+    additionalProperties: {}
+  get-vpcs-DT:
+    type: "object"
+    required:
+    - "data"
+    - "total"
+    properties:
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/getvpcsDT_data"
+      total:
+        type: "integer"
+    example:
+      data:
+      - id: "12345"
+        name: "myProductionVpc"
+        region: "us-east-1"
+        cidrBlock: "192.168.1.0/24"
+        internalDns:
+          dnsServers:
+          - "8.8.8.8"
+          - "8.8.8.4"
+          specialDomains:
+          - "mydomain.local"
+          - "mydomain.localdomain"
+        isDefault: false
+        associatedEnvironments:
+        - "eeeeb145-6f79-402d-85fc-8c90905d2490"
+        ownerId: "5555555-6666-7777-8888-99999999999"
+        sharedWith:
+        - "0000000-1111-2222-3333-44444444444"
+        firewallRules:
+        - cidrBlock: "0.0.0.0/0"
+          protocol: "tcp"
+          fromPort: 8081
+          toPort: 8082
+        - cidrBlock: "192.168.1.0/24"
+          protocol: "tcp"
+          fromPort: 8091
+          toPort: 8092
+      total: 1
+    additionalProperties: {}
+  get-vpc-DT:
+    type: "object"
+    required:
+    - "cidrBlock"
+    - "id"
+    - "name"
+    - "region"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+      region:
+        type: "string"
+      cidrBlock:
+        type: "string"
+      internalDns:
+        $ref: "#/definitions/postvpcDT_internalDns"
+      isDefault:
+        type: "boolean"
+      associatedEnvironments:
+        type: "array"
+        items:
+          type: "string"
+      ownerId:
+        type: "string"
+      sharedWith:
+        type: "array"
+        items:
+          type: "string"
+      firewallRules:
+        type: "array"
+        items:
+          $ref: "#/definitions/getvpcsDT_firewallRules"
+    example:
+      id: "vpc-0ccfba9423074b6f8"
+      name: "myProductionVpc"
+      region: "us-east-1"
+      cidrBlock: "192.168.1.0/24"
+      internalDns:
+        dnsServers: []
+        specialDomains: []
+      isDefault: false
+      associatedEnvironments:
+      - "3b4a2576-4091-4950-bb73-21ca40537b7d"
+      ownerId: "7339eb19-624f-4496-a889-beb2ec98ee66"
+      sharedWith: []
+      firewallRules:
+      - cidrBlock: "192.168.1.0/24"
+        protocol: "tcp"
+        fromPort: 8091
+        toPort: 8092
+      - cidrBlock: "0.0.0.0/0"
+        protocol: "tcp"
+        fromPort: 8081
+        toPort: 8082
+    additionalProperties: {}
+  post-vpn-DT:
+    type: "object"
+    required:
+    - "name"
+    - "remoteIpAddress"
+    properties:
+      name:
+        type: "string"
+      localAsn:
+        type: "integer"
+      remoteAsn:
+        type: "integer"
+      remoteIpAddress:
+        type: "string"
+      remoteNetworks:
+        type: "array"
+        items:
+          type: "string"
+      tunnelConfigs:
+        type: "array"
+        items:
+          $ref: "#/definitions/postvpnDT_tunnelConfigs"
+    example:
+      name: "myDatacenterVpn"
+      localAsn: 64512
+      remoteIpAddress: "52.152.216.66"
+      remoteNetworks:
+      - "10.0.0.0/24"
+      tunnelConfigs: []
+    additionalProperties: {}
+  get-vpns-DT:
+    type: "object"
+    required:
+    - "total"
+    properties:
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/getvpnsDT_data"
+      total:
+        type: "integer"
+    example:
+      data:
+      - id: "4a6e3da830767b280a80ce33"
+        spec:
+          name: "myDatacenterVpn"
+          remoteIpAddress: "100.100.100.100"
+          routingType: "STATIC"
+          remoteNetworks:
+          - "10.5.0.0/16"
+          tunnelConfigs:
+          - psk: "LKvQAyV7DyR1Q7kZoIAymsqFOh3SWb2S"
+            ptpCidr: "169.254.12.0/30"
+          - psk: "q.NFQABcVnKLp2.zjR7Pw7YtH9gICJlt"
+            ptpCidr: "169.254.12.4/30"
+        state:
+          vpnConnectionStatus: "AVAILABLE"
+          createdAt: "2017-01-01T00:00:01-0800"
+          bgpRoutes: []
+          staticRoutes:
+          - remoteNetwork: "10.5.0.0/16"
+            state: "AVAILABLE"
+          vpnTunnels:
+          - acceptedRouteCount: 1
+            lastStatusChange: "2018-01-13T16:30:07-0800"
+            localExternalIpAddress: "50.112.49.102"
+            localPtpIpAddress: "169.254.13.241"
+            remotePtpIpAddress: "169.254.13.242"
+            psk: "LKvQAyV7DyR1Q7kZoIAymsqFOh3SWb2S"
+            status: "UP"
+            statusMessage: ""
+          - acceptedRouteCount: 1
+            lastStatusChange: "2018-01-13T16:30:07-0800"
+            localExternalIpAddress: "34.216.124.13"
+            localPtpIpAddress: "169.254.15.17"
+            remotePtpIpAddress: "169.254.15.18"
+            psk: "q.NFQABcVnKLp2.zjR7Pw7YtH9gICJlt"
+            status: "DOWN"
+            statusMessage: ""
+      total: 1
+    additionalProperties: {}
+  get-vpn-DT:
+    type: "object"
+    required:
+    - "id"
+    - "state"
+    properties:
+      id:
+        type: "string"
+      spec:
+        $ref: "#/definitions/getvpnsDT_spec"
+      state:
+        $ref: "#/definitions/getvpnsDT_state"
+    example:
+      id: "4a6e3da830767b280a80ce33"
+      spec:
+        name: "myDatacenterVpn"
+        remoteAsn: 65000
+        localAsn: 7224
+        remoteIpAddress: "100.100.100.100"
+        routingType: "BGP"
+      state:
+        vpnConnectionStatus: "AVAILABLE"
+        createdAt: "2017-01-01T00:00:01-0800"
+        bgpRoutes:
+        - remoteNetwork: "10.5.0.0/16"
+          state: "ACTIVE"
+        staticRoutes: []
+        vpnTunnels:
+        - acceptedRouteCount: 2
+          lastStatusChange: "2018-01-13T16:30:07-0800"
+          localExternalIpAddress: "50.112.49.102"
+          localPtpIpAddress: "169.254.13.241"
+          remotePtpIpAddress: "169.254.13.242"
+          psk: "LKvQAyV7DyR1Q7kZoIAymsqFOh3SWb2S"
+          status: "UP"
+          statusMessage: ""
+        - acceptedRouteCount: 2
+          lastStatusChange: "2018-01-13T16:30:07-0800"
+          localExternalIpAddress: "34.216.124.13"
+          localPtpIpAddress: "169.254.15.17"
+          remotePtpIpAddress: "169.254.15.18"
+          psk: "q.NFQABcVnKLp2.zjR7Pw7YtH9gICJlt"
+          status: "DOWN"
+          statusMessage: ""
+    additionalProperties: {}
+  postvpcDT_internalDns:
+    type: "object"
+    required:
+    - "dnsServers"
+    - "specialDomains"
+    properties:
+      dnsServers:
+        type: "array"
+        items:
+          type: "string"
+      specialDomains:
+        type: "array"
+        items:
+          type: "string"
+  postvpcDT_firewallRules:
+    type: "object"
+    required:
+    - "cidrBlock"
+    - "fromPort"
+    - "protocol"
+    - "toPort"
+    properties:
+      cidrBlock:
+        type: "string"
+      protocol:
+        type: "string"
+        minLength: 3
+        enum:
+        - "tcp"
+        - "udp"
+      fromPort:
+        type: "integer"
+      toPort:
+        type: "integer"
+  getvpcsDT_firewallRules:
+    type: "object"
+    required:
+    - "cidrBlock"
+    - "fromPort"
+    - "protocol"
+    - "toPort"
+    properties:
+      cidrBlock:
+        type: "string"
+      protocol:
+        type: "string"
+      fromPort:
+        type: "integer"
+      toPort:
+        type: "integer"
+  getvpcsDT_data:
+    type: "object"
+    required:
+    - "cidrBlock"
+    - "id"
+    - "name"
+    - "region"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+      region:
+        type: "string"
+      cidrBlock:
+        type: "string"
+      internalDns:
+        $ref: "#/definitions/postvpcDT_internalDns"
+      isDefault:
+        type: "boolean"
+      associatedEnvironments:
+        type: "array"
+        items:
+          type: "string"
+      ownerId:
+        type: "string"
+      sharedWith:
+        type: "array"
+        items:
+          type: "string"
+      firewallRules:
+        type: "array"
+        items:
+          $ref: "#/definitions/getvpcsDT_firewallRules"
+  postvpnDT_tunnelConfigs:
+    type: "object"
+    required:
+    - "psk"
+    - "ptpCidr"
+    properties:
+      psk:
+        type: "string"
+      ptpCidr:
+        type: "string"
+  getvpnsDT_spec_tunnelConfigs:
+    type: "object"
+    properties:
+      psk:
+        type: "string"
+      ptpCidr:
+        type: "string"
+  getvpnsDT_spec:
+    type: "object"
+    required:
+    - "routingType"
+    properties:
+      name:
+        type: "string"
+      remoteAsn:
+        type: "integer"
+      localAsn:
+        type: "integer"
+      remoteIpAddress:
+        type: "string"
+      routingType:
+        type: "string"
+      remoteNetworks:
+        type: "array"
+        items:
+          type: "string"
+      tunnelConfigs:
+        type: "array"
+        items:
+          $ref: "#/definitions/getvpnsDT_spec_tunnelConfigs"
+  getvpnsDT_state_bgpRoutes:
+    type: "object"
+    required:
+    - "remoteNetwork"
+    - "state"
+    properties:
+      remoteNetwork:
+        type: "string"
+      state:
+        type: "string"
+        enum:
+        - "ACTIVE"
+        - "BLACKHOLE"
+  getvpnsDT_state_staticRoutes:
+    type: "object"
+    required:
+    - "remoteNetwork"
+    - "state"
+    properties:
+      remoteNetwork:
+        type: "string"
+      state:
+        type: "string"
+        enum:
+        - "PENDING"
+        - "AVAILABLE"
+        - "DELETING"
+        - "DELETED"
+  getvpnsDT_state_vpnTunnels:
+    type: "object"
+    required:
+    - "acceptedRouteCount"
+    - "lastStatusChange"
+    - "localExternalIpAddress"
+    - "localPtpIpAddress"
+    - "psk"
+    - "remotePtpIpAddress"
+    - "status"
+    properties:
+      acceptedRouteCount:
+        type: "integer"
+      lastStatusChange:
+        type: "string"
+      localExternalIpAddress:
+        type: "string"
+      localPtpIpAddress:
+        type: "string"
+      remotePtpIpAddress:
+        type: "string"
+      psk:
+        type: "string"
+      status:
+        type: "string"
+        enum:
+        - "UP"
+        - "DOWN"
+      statusMessage:
+        type: "string"
+  getvpnsDT_state:
+    type: "object"
+    properties:
+      vpnConnectionStatus:
+        type: "string"
+        enum:
+        - "PENDING"
+        - "AVAILABLE"
+        - "DELETING"
+        - "DELETED"
+      createdAt:
+        type: "string"
+      bgpRoutes:
+        type: "array"
+        items:
+          $ref: "#/definitions/getvpnsDT_state_bgpRoutes"
+      staticRoutes:
+        type: "array"
+        items:
+          $ref: "#/definitions/getvpnsDT_state_staticRoutes"
+      vpnTunnels:
+        type: "array"
+        items:
+          $ref: "#/definitions/getvpnsDT_state_vpnTunnels"
+  getvpnsDT_data:
+    type: "object"
+    required:
+    - "id"
+    - "state"
+    properties:
+      id:
+        type: "string"
+      spec:
+        $ref: "#/definitions/getvpnsDT_spec"
+      state:
+        $ref: "#/definitions/getvpnsDT_state"
